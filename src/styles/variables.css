@@ -1,0 +1,150 @@
+/**
+ * variables.css - CSS Custom Properties (variables)
+ * 
+ * This file defines all the design tokens used throughout the app.
+ * Using CSS variables makes it easy to change the look and feel
+ * and supports theming for accessibility.
+ */
+
+:root {
+  /* 
+   * Color Palette
+   * These colors are chosen to be bright, friendly, and accessible
+   */
+  
+  /* Primary colors - used for main actions */
+  --color-primary: #667eea;
+  --color-primary-dark: #764ba2;
+  --color-primary-gradient: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  
+  /* Secondary colors - used for accents */
+  --color-secondary: #f093fb;
+  --color-secondary-dark: #f5576c;
+  --color-secondary-gradient: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
+  
+  /* Timer colors - progress indication */
+  --color-timer-full: #4caf50;
+  --color-timer-medium: #ffeb3b;
+  --color-timer-low: #ff9800;
+  --color-timer-empty: #f44336;
+  
+  /* Background colors */
+  --color-bg: #fafafa;
+  --color-bg-elevated: #ffffff;
+  --color-bg-timer: #f5f5f5;
+  
+  /* Text colors */
+  --color-text: #333333;
+  --color-text-secondary: #666666;
+  --color-text-light: #999999;
+  
+  /* UI colors */
+  --color-border: #e0e0e0;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-focus: #2196f3;
+  
+  /* 
+   * Typography
+   */
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-size-base: 16px;
+  --font-size-large: 18px;
+  --font-size-small: 14px;
+  
+  /* 
+   * Spacing
+   */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+  
+  /* 
+   * Border radius
+   */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+  
+  /* 
+   * Shadows
+   */
+  --shadow-sm: 0 2px 4px var(--color-shadow);
+  --shadow-md: 0 4px 12px var(--color-shadow);
+  --shadow-lg: 0 8px 24px var(--color-shadow);
+  --shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.15);
+  
+  /* 
+   * Transitions
+   */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* 
+   * Layout
+   */
+  --max-width: 600px;
+  --header-height: 60px;
+  
+  /* 
+   * Touch targets (minimum size for accessibility)
+   */
+  --touch-target-min: 44px;
+  --touch-target-large: 60px;
+}
+
+/* 
+ * High Contrast Mode
+ * Activated when user enables high contrast in settings
+ */
+body.high-contrast {
+  --color-bg: #000000;
+  --color-bg-elevated: #000000;
+  --color-text: #ffffff;
+  --color-text-secondary: #ffffff;
+  --color-border: #ffffff;
+  --color-focus: #ffff00;
+  
+  --color-timer-full: #00ff00;
+  --color-timer-medium: #ffff00;
+  --color-timer-low: #ff8800;
+  --color-timer-empty: #ff0000;
+  
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+}
+
+/* 
+ * Reduced Motion
+ * Respects user's motion preferences
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body.reduced-motion {
+  --transition-fast: 0.01ms;
+  --transition-normal: 0.01ms;
+  --transition-slow: 0.01ms;
+}
+
+/* 
+ * Large Buttons Mode
+ * Makes buttons bigger for easier touch targets
+ */
+body.large-buttons {
+  --touch-target-min: 60px;
+  --touch-target-large: 80px;
+}

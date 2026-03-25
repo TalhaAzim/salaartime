@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A gentle visual timer for kids - no numbers, just colors!">
+  <meta name="theme-color" content="#667eea">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Salaar Time">
+  <title>Salaar Time</title>
+  
+  <!-- Preconnect to improve performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  
+  <!-- Apple Touch Icons -->
+  <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/src/styles/variables.css">
+  <link rel="stylesheet" href="/src/styles/components.css">
+  <link rel="stylesheet" href="/src/styles/accessibility.css">
+  
+  <style>
+    /* Critical CSS - Load immediately */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      font-size: 16px;
+      -webkit-text-size-adjust: 100%;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip link for keyboard navigation -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <div id="app">
+    <!-- Accessibility Settings Panel -->
+    <accessibility-panel id="accessibility-panel"></accessibility-panel>
+    
+    <!-- Main Content -->
+    <main id="main-content" class="app-container">
+      <!-- Header -->
+      <header class="app-header">
+        <h1 class="app-title">Salaar Time</h1>
+        <p class="app-subtitle">Watch the colors change as time passes</p>
+      </header>
+      
+      <!-- Timer Section -->
+      <section class="timer-section" aria-label="Timer">
+        <!-- Visual Timer Component -->
+        <visual-timer id="visual-timer" duration="300000"></visual-timer>
+        
+        <!-- Status Indicator -->
+        <div class="status-indicator" aria-live="polite">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span class="status-text">Ready to start</span>
+        </div>
+        
+        <!-- Timer Controls Component -->
+        <timer-controls id="timer-controls"></timer-controls>
+      </section>
+    </main>
+    
+    <!-- Completion Celebration Modal -->
+    <div id="completion-celebration" class="completion-celebration" role="dialog" 
+         aria-modal="true" aria-labelledby="completion-title">
+      <div class="completion-content">
+        <svg class="completion-icon" viewBox="0 0 24 24" fill="none" 
+             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" 
+                fill="currentColor"/>
+        </svg>
+        
+        <h2 id="completion-title" class="completion-title">All Done!</h2>
+        <p class="completion-message">Great job! You finished your time.</p>
+        
+        <button id="dismiss-completion" class="completion-button">
+          Start Again
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Main JavaScript -->
+  <script type="module" src="/src/main.js"></script>
+  
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then((registration) => {
+            console.log('[PWA] Service Worker registered:', registration.scope);
+          })
+          .catch((error) => {
+            console.error('[PWA] Service Worker registration failed:', error);
+          });
+      });
+    }
+  </script>
+</body>
+</html>
